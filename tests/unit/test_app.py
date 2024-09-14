@@ -10,7 +10,7 @@ from app.main.routes import explore
 from app.main import routes
 
 def test_explore_page():
-    response = routes.test_client().get('/explore')
+    response = routes.explore().get('/explore')
     assertEqual(response.status_code, 200)  # OK
 
 if __name__ == '__main__':
