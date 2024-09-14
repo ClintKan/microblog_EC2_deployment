@@ -8,8 +8,8 @@ pipeline {
                 # sudo apt install python3.9-venv -y # this would be uncommented if not done initially
                 # sudo apt install python3-pip -y # this would be uncommented if not done initially
                 sudo apt install nginx
-                python3.9 -m venv virtual
-                source virtual/bin/activate
+                python3.9 -m venv venv
+                source venv/bin/activate
                 pip install -r requirements.txt
                 pip install gunicorn pymysql cryptography
                 export FLASK_APP=microblog.py
