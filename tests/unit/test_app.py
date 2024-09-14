@@ -6,7 +6,7 @@ import unittest
 sys.path.append(os.path.abspath("/home/ubuntu/microblog_EC2_deployment/app/main/routes.py"))
 
 # importing routes
-from routes import explore
+from microblog_EC2_deployment.app.main.routes import explore
 
 def test_explore_page():
     response = request.get('/explore')
