@@ -1,0 +1,7 @@
+virtual
+venv
+__pycache__
+.git
+app.db
+babel.cfg
+
