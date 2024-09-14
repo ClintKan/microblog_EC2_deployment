@@ -1,17 +1,18 @@
-import sys
-import os
-import unittest
+import pytest
+import requests
 
-# Appending the directory path where routes.py is located
-sys.path.append(os.path.abspath("/home/ubuntu/microblog_EC2_deployment/app/main/routes.py"))
+@pytest.fixture
+def base_url():
+    return "http://3.141.40.42"
 
-# importing routes
-from app.main.routes import explore
-from app.main import routes
+def test_get_request(base_url):
+    response = requests.get(f"{base_url}/")
+    assert response.status_code == 200
 
-def test_explore_page():
-    response = routes.explore().get('/explore')
-    assertEqual(response.status_code, 200)  # OK
+def test_get_request(base_url):
+    response = requests.get(f"{base_url}/auth/login")
+    assert response.status_code == 200
 
-if __name__ == '__main__':
-    unittest.main()
+def test_get_request(base_url):
+    response = requests.get(f"{base_url}/explore")
+    assert response.status_code == 200
