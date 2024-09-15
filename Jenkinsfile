@@ -22,7 +22,7 @@ pipeline {
             steps {
                 sh '''#!/bin/bash
                 source venv/bin/activate
-                py.test ./tests/unit/ --verbose --junit-xml test-reports/results.xml
+                pytest ./tests/unit/ --verbose --junit-xml test-reports/results.xml
                 '''
             }
             post {
@@ -52,7 +52,8 @@ pipeline {
       stage ('Deploy') {
             steps {
                 sh '''#!/bin/bash
-                <enter your code here>
+                source venv/bin/activate
+                gunicorn -b :5000 -w 4 microblog:app
                 '''
             }
         }
