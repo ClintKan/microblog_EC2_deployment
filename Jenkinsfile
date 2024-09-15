@@ -24,28 +24,28 @@ pipeline {
                 '''
             }
         }
-        // stage ('Test') {
-        //     steps {
-        //         sh '''#!/bin/bash
-        //         gunicorn -b :5000 -w 4 microblog:app
-        //         py.test ./tests/unit/test_app.py --verbose --junit-xml test-reports/results.xml
-        //         '''
-        //     }
-        //     post {
-        //         always {
-        //             junit 'test-reports/results.xml'
-        //         }
-        //     }
-        // }
+        stage ('Test') {
+            steps {
+                sh '''#!/bin/bash
+                gunicorn -b :5000 -w 4 microblog:app
+                py.test /var/lib/jenkins/workspace/workload_3_main/tests/unit/ --verbose --junit-xml test-reports/results.xml
+                '''
+            }
+            post {
+                always {
+                    junit '/var/lib/jenkins/workspace/workload_3_main/test-reports/results.xml'
+                }
+            }
+        }
         stage('Testing Status Code') {
             steps {
                 echo "Testing Status Code"
                 script {     
                     echo "Test Application Status Code == 200"       
-                    statuscode = sh (script: "curl -s -o /dev/null -w \"%{http_code}\" 'http://3.20.235.84'",returnStdout: true)
+                    statuscode = sh (script: "curl -LI 'http://3.20.235.84' -o /dev/null -w '%{http_code}' -s",returnStdout: true)
                     echo "${statuscode}"
-                    if ( "${statuscode}" == "302" ){
-                    echo "Application has been found!!!"
+                    if ( "${statuscode}" == "200" ){
+                    echo "Application is live!!!"
                     } else {
                     error("Application is Down")
                     }
@@ -67,6 +67,7 @@ pipeline {
                 kill $(cat pid.txt)
                 exit 0
                 fi
+                deactivate
                 '''
             }
         }
