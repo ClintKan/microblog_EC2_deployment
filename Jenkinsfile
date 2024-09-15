@@ -38,10 +38,9 @@ pipeline {
         stage('Testing Status Code') {
             steps {
                 echo "Testing Status Code"
-                def link = "http://3.20.235.84:8080"
                 script {     
                     echo "Test Application Status Code == 200"       
-                    statuscode = sh (script: "curl -s -o /dev/null -w \"%{http_code}\" ${link}",returnStdout: true)
+                    statuscode = sh (script: "curl -s -o /dev/null -w \"%{http_code}\" 'http://3.20.235.84:8080'",returnStdout: true)
                     echo "${statuscode}"
                     if ( "${statuscode}" == "200" ){
                     echo "Application is Live!!!"
