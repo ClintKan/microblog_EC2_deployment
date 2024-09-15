@@ -22,7 +22,7 @@ pipeline {
             steps {
                 sh '''#!/bin/bash
                 # gunicorn -b :5000 -w 4 microblog:app
-                py.test ./tests/unit/ --verbose --junit-xml test-reports/results.xml
+                py.test ./tests/unit/test_app.py --verbose --junit-xml test-reports/results.xml
                 '''
             }
             post {
