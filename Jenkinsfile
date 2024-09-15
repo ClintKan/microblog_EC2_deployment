@@ -23,8 +23,7 @@ pipeline {
                 sh '''#!/bin/bash
                 source venv/bin/activate
                 gunicorn -b :5000 -w 4 microblog:app
-                python -m unittest /home/ubuntu/microblog_EC2_deployment/tests/unit/test_app.py
-                #pytest ./tests/unit/ --verbose --junit-xml test-reports/results.xml
+                pytest ./tests/unit/ --verbose --junit-xml test-reports/results.xml
                 '''
             }
             post {

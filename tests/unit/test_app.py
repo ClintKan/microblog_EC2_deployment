@@ -16,3 +16,5 @@ def test_get_login(base_url):
 def test_get_explore(base_url):
     response = requests.get(f"{base_url}/explore", timeout=3)
     assert response.status_code == 200
+
+# nice 3 test functions
