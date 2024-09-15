@@ -16,7 +16,7 @@ pipeline {
                 pip install flask
                 sudo apt-get install python3-flask -y
                 pip install gunicorn pymysql cryptography
-                export FLASK_APP=microblog.py
+                echo 'export FLASK_APP=microblog.py' >> ~/.bashrc
                 flask translate compile
                 flask db upgrade
                 '''
