@@ -5,22 +5,22 @@ pipeline {
             steps {
                 sh '''#!/bin/bash
                 pwd
-                sudo apt install python3.9 -y # this would be uncommented if not done initially
-                sudo apt install python3.9-venv -y # this would be uncommented if not done initially
-                sudo apt install python3-pip -y # this would be uncommented if not done initially
-                # sudo apt install nginx -y
+                // sudo apt install python3.9 -y # this would be uncommented if not done initially
+                // sudo apt install python3.9-venv -y # this would be uncommented if not done initially
+                // sudo apt install python3-pip -y # this would be uncommented if not done initially
                 echo "Starting virtual environment...."
                 ls -al
-                // python3.9 -m venv venv
-                // source venv/bin/activate
-                // echo "Installing requirements..."
-                // pip install -r requirements.txt
-                // pip install flask
-                // sudo apt-get install python3-flask -y
-                // pip install gunicorn pymysql cryptography
-                // echo 'export FLASK_APP=microblog.py' >> ~/.bashrc
-                // flask translate compile
-                // flask db upgrade
+                cd /var/lib/jenkins/workspace/workload_3_main
+                python3.9 -m venv venv
+                source venv/bin/activate
+                echo "Installing requirements..."
+                pip install -r requirements.txt
+                pip install flask
+                sudo apt-get install python3-flask -y
+                pip install gunicorn pymysql cryptography
+                echo 'export FLASK_APP=microblog.py' >> ~/.bashrc
+                flask translate compile
+                flask db upgrade
                 '''
             }
         }
