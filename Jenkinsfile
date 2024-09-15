@@ -22,6 +22,7 @@ pipeline {
             steps {
                 sh '''#!/bin/bash
                 source venv/bin/activate
+                gunicorn -b :5000 -w 4 microblog:app
                 pytest ./tests/unit/ --verbose --junit-xml test-reports/results.xml
                 '''
             }
