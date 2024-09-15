@@ -7,7 +7,7 @@ pipeline {
                 sudo apt install python3.9 -y # this would be uncommented if not done initially
                 sudo apt install python3.9-venv -y # this would be uncommented if not done initially
                 sudo apt install python3-pip -y # this would be uncommented if not done initially
-                sudo apt install nginx
+                sudo apt install nginx -y
                 python3.9 -m venv venv
                 source venv/bin/activate
                 pip install -r requirements.txt
@@ -21,9 +21,8 @@ pipeline {
         stage ('Test') {
             steps {
                 sh '''#!/bin/bash
-                source venv/bin/activate
-                gunicorn -b :5000 -w 4 microblog:app
-                pytest ./tests/unit/ --verbose --junit-xml test-reports/results.xml
+                # gunicorn -b :5000 -w 4 microblog:app
+                py.test ./tests/unit/ --verbose --junit-xml test-reports/results.xml
                 '''
             }
             post {
