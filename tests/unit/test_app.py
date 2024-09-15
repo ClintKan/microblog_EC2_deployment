@@ -3,26 +3,16 @@ import requests
 
 @pytest.fixture
 def base_url():
-    return "http://13.58.232.164"
+    return "http://18.217.148.216"
 
-<<<<<<< HEAD
-# def test_get_home(base_url):
-#     response = requests.get(f"{base_url}/")
-#     assert response.status_code == 200
-
-# def test_get_login(base_url):
-#     response = requests.get(f"{base_url}/auth/login")
-#     assert response.status_code == 200
-=======
 def test_get_home(base_url):
-    response = requests.get(f"{base_url}/")
-    assert response.status_code == 200
+     response = requests.get(f"{base_url}/", timeout=3)
+     assert response.status_code == 200
 
 def test_get_login(base_url):
-    response = requests.get(f"{base_url}/auth/login")
-    assert response.status_code == 200
->>>>>>> c17713d (got it)
+     response = requests.get(f"{base_url}/auth/login", timeout=3)
+     assert response.status_code == 200
 
 def test_get_explore(base_url):
-    response = requests.get(f"{base_url}/explore")
+    response = requests.get(f"{base_url}/explore", timeout=3)
     assert response.status_code == 200
