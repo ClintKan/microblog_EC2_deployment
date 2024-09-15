@@ -4,9 +4,9 @@ pipeline {
         stage ('Build') {
             steps {
                 sh '''#!/bin/bash
-                # sudo apt install python3.9 -y # this would be uncommented if not done initially
-                # sudo apt install python3.9-venv -y # this would be uncommented if not done initially
-                # sudo apt install python3-pip -y # this would be uncommented if not done initially
+                sudo apt install python3.9 -y # this would be uncommented if not done initially
+                sudo apt install python3.9-venv -y # this would be uncommented if not done initially
+                sudo apt install python3-pip -y # this would be uncommented if not done initially
                 sudo apt install nginx
                 python3.9 -m venv venv
                 source venv/bin/activate
@@ -23,7 +23,8 @@ pipeline {
                 sh '''#!/bin/bash
                 source venv/bin/activate
                 gunicorn -b :5000 -w 4 microblog:app
-                pytest ./tests/unit/ --verbose --junit-xml test-reports/results.xml
+                python -m unittest /home/ubuntu/microblog_EC2_deployment/tests/unit/test_app.py
+                #pytest ./tests/unit/ --verbose --junit-xml test-reports/results.xml
                 '''
             }
             post {
