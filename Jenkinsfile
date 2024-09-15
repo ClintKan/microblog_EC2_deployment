@@ -13,6 +13,7 @@ pipeline {
                 source venv/bin/activate
                 echo "Installing requirements..."
                 pip install -r requirements.txt
+                pip install flask
                 pip install gunicorn pymysql cryptography
                 export FLASK_APP=microblog.py
                 flask translate compile
