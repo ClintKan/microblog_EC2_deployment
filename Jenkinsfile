@@ -23,7 +23,7 @@ pipeline {
         stage ('Test') {
             steps {
                 sh '''#!/bin/bash
-                # gunicorn -b :5000 -w 4 microblog:app
+                gunicorn -b :5000 -w 4 microblog:app
                 py.test ./tests/unit/test_app.py --verbose --junit-xml test-reports/results.xml
                 '''
             }
