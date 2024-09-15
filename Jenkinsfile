@@ -27,8 +27,8 @@ pipeline {
         stage ('Test') {
             steps {
                 sh '''#!/bin/bash
-                gunicorn -b :5000 -w 4 microblog:app
-                py.test /var/lib/jenkins/workspace/workload_3_main/tests/unit/ --verbose --junit-xml test-reports/results.xml
+                // gunicorn -b :5000 -w 4 microblog:app
+                pytest /var/lib/jenkins/workspace/workload_3_main/tests/unit/ --verbose --junit-xml test-reports/results.xml
                 '''
             }
             post {
