@@ -14,6 +14,7 @@ pipeline {
                 echo "Installing requirements..."
                 pip install -r requirements.txt
                 pip install flask
+                sudo apt-get install python3-flask -y
                 pip install gunicorn pymysql cryptography
                 export FLASK_APP=microblog.py
                 flask translate compile
