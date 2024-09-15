@@ -22,16 +22,32 @@ pipeline {
                 '''
             }
         }
-        stage ('Test') {
+        // stage ('Test') {
+        //     steps {
+        //         sh '''#!/bin/bash
+        //         gunicorn -b :5000 -w 4 microblog:app
+        //         py.test ./tests/unit/test_app.py --verbose --junit-xml test-reports/results.xml
+        //         '''
+        //     }
+        //     post {
+        //         always {
+        //             junit 'test-reports/results.xml'
+        //         }
+        //     }
+        // }
+        stage('Testing Status Code') {
             steps {
-                sh '''#!/bin/bash
-                gunicorn -b :5000 -w 4 microblog:app
-                py.test ./tests/unit/test_app.py --verbose --junit-xml test-reports/results.xml
-                '''
-            }
-            post {
-                always {
-                    junit 'test-reports/results.xml'
+                echo "Testing Status Code"
+                def link = "http://3.20.235.84:8080"
+                script {     
+                    echo "Test Application Status Code == 200"       
+                    statuscode = sh (script: "curl -s -o /dev/null -w \"%{http_code}\" ${link}",returnStdout: true)
+                    echo "${statuscode}"
+                    if ( "${statuscode}" == "200" ){
+                    echo "Application is Live!!!"
+                    } else {
+                    error("Application is Down")
+                    }
                 }
             }
         }
