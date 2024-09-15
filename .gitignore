@@ -1,6 +1,7 @@
+logs
 virtual
 venv
 __pycache__
 .git
 app.db
-
+.pytest_cache
