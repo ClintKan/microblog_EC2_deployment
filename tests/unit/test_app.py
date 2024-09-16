@@ -11,7 +11,7 @@ def client():
 
 def test_get_home(client):
      response = client.get("/", follow_redirects=True)
-     assert response.status_code == 302
+     assert response.status_code == 200
 
 def test_get_login(client):
      response = client.get("/auth/login", follow_redirects=True)
