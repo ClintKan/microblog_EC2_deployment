@@ -3,7 +3,7 @@ import requests
 
 @pytest.fixture
 def base_url():
-    return "http://3.20.235.84"
+    return "http://18.188.200.134"
 
 def test_get_home(base_url):
      response = requests.get(f"{base_url}/", timeout=3)

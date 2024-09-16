@@ -42,7 +42,7 @@ pipeline {
                 echo "Testing Status Code"
                 script {     
                     echo "Test Application Status Code == 200"       
-                    statuscode = sh (script: "curl -LI 'http://3.20.235.84' -o /dev/null -w '%{http_code}' -s",returnStdout: true)
+                    statuscode = sh (script: "curl -LI 'http://18.188.200.134' -o /dev/null -w '%{http_code}' -s",returnStdout: true)
                     echo "${statuscode}"
                     if ( "${statuscode}" == "200" ){
                     echo "Application is live!!!"
