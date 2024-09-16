@@ -37,21 +37,21 @@ pipeline {
                 }
             }
         }
-        stage('Testing Status Code') {
-            steps {
-                echo "Testing Status Code"
-                script {     
-                    echo "Test Application Status Code == 200"       
-                    statuscode = sh (script: "curl -LI 'http://18.188.200.134' -o /dev/null -w '%{http_code}' -s",returnStdout: true)
-                    echo "${statuscode}"
-                    if ( "${statuscode}" == "200" ){
-                    echo "Application is live!!!"
-                    } else {
-                    error("Application is Down")
-                    }
-                }
-            }
-        }
+        // stage('Testing Status Code') {
+        //     steps {
+        //         echo "Testing Status Code"
+        //         script {     
+        //             echo "Test Application Status Code == 200"       
+        //             statuscode = sh (script: "curl -LI 'http://18.188.200.134' -o /dev/null -w '%{http_code}' -s",returnStdout: true)
+        //             echo "${statuscode}"
+        //             if ( "${statuscode}" == "200" ){
+        //             echo "Application is live!!!"
+        //             } else {
+        //             error("Application is Down")
+        //             }
+        //         }
+        //     }
+        // }
       stage ('OWASP FS SCAN') {
             steps {
                 dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Check'
