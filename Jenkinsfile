@@ -19,6 +19,7 @@ pipeline {
             steps {
                 sh '''#!/bin/bash
                 source venv/bin/activate
+                export PYTHONPATH=$(pwd)
                 pytest --junit-xml test-reports/results.xml ./tests/unit/ // --verbose
                 '''
             }
@@ -28,37 +29,25 @@ pipeline {
                 }
             }
         }
-        // stage('Testing Status Code') {
-        //     steps {
-        //         echo "Testing Status Code"
-        //         script {     
-        //             echo "Test Application Status Code == 200"       
-        //             statuscode = sh (script: "curl -LI 'http://18.188.200.134' -o /dev/null -w '%{http_code}' -s",returnStdout: true)
-        //             echo "${statuscode}"
-        //             if ( "${statuscode}" == "200" ){
-        //             echo "Application is live!!!"
-        //             } else {
-        //             error("Application is Down")
-        //             }
-        //         }
-        //     }
-        // }
       stage ('OWASP FS SCAN') {
             steps {
-                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Check'
+                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit --nvdApiKey 5a3a753b-8edc-43f5-a07f-14f53235a3e9', odcInstallation: 'DP-Check'
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         }
       stage ('Clean') {
             steps {
                 sh '''#!/bin/bash
-                if [[ $(ps aux | grep -i "gunicorn" | tr -s " " | head -n 1 | cut -d " " -f 2) != 0 ]]
-                then
-                ps aux | grep -i "gunicorn" | tr -s " " | head -n 1 | cut -d " " -f 2 > pid.txt
-                kill $(cat pid.txt)
-                exit 0
+                pid=$(pgrep -f "gunicorn")
+
+                # Check if PID is found and is valid (non-empty)
+                if [[ -n "$pid" && "$pid" -gt 0 ]]; then
+                    echo "$pid" > pid.txt
+                    kill "$pid"
+                    echo "Killed gunicorn process with PID $pid"
+                else
+                    echo "No gunicorn process found to kill"
                 fi
-                deactivate
                 '''
             }
         }
@@ -67,9 +56,9 @@ pipeline {
                 sh '''#!/bin/bash
                 source venv/bin/activate
                 gunicorn -b :5000 -w 4 microblog:app
+
                 '''
             }
         }
     }
 }
- 
