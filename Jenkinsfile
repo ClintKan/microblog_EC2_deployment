@@ -54,9 +54,21 @@ pipeline {
       stage ('Deploy') {
             steps {
                 sh '''#!/bin/bash
+                # Start Flask application
                 source venv/bin/activate
-                gunicorn -b :5000 -w 4 microblog:app
 
+                # Restart the microblog service
+                sudo /bin/systemctl restart microblog
+
+                # Check the status of the service
+                if sudo /bin/systemctl is-active --quiet microblog; then
+                    echo "microblog restarted successfully"
+                else
+                    echo "Failed to restart microblog"
+                    # Print logs for debugging
+                    sudo /bin/journalctl -u microblog
+                    exit 1
+                fi
                 '''
             }
         }
