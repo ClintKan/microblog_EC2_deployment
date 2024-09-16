@@ -4,21 +4,12 @@ pipeline {
         stage ('Build') {
             steps {
                 sh '''#!/bin/bash
-                pwd
-                // sudo apt install python3.9 -y # this would be uncommented if not done initially
-                // sudo apt install python3.9-venv -y # this would be uncommented if not done initially
-                // sudo apt install python3-pip -y # this would be uncommented if not done initially
-                // echo "Starting virtual environment...."
-                // ls -al
-                // cd /var/lib/jenkins/workspace/workload_3_main
-                // python3.9 -m venv venv
-                // pip install flask
-                // sudo apt-get install python3-flask -y
-                // pip install gunicorn pymysql cryptography
+                python3.9 -m venv venv
                 source venv/bin/activate
                 echo "Installing requirements..."
                 pip install -r requirements.txt
-                echo 'export FLASK_APP=microblog.py' >> ~/.bashrc
+                pip install gunicorn pymysql cryptography
+                export FLASK_APP=microblog.py
                 flask translate compile
                 flask db upgrade
                 '''
@@ -27,7 +18,7 @@ pipeline {
         stage ('Test') {
             steps {
                 sh '''#!/bin/bash
-                // gunicorn -b :5000 -w 4 microblog:app
+                source venv/bin/activate
                 pytest --junit-xml test-reports/results.xml ./tests/unit/ // --verbose
                 '''
             }
