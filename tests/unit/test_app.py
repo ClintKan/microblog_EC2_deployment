@@ -10,15 +10,15 @@ def client():
             yield client
 
 def test_get_home(client):
-     response = client.get("/", timeout=3, follows_redirect=True)
+     response = client.get("/", follows_redirect=True)
      assert response.status_code == 302
 
 def test_get_login(client):
-     response = client.get("/auth/login", timeout=3, follows_redirect=True)
+     response = client.get("/auth/login", follows_redirect=True)
      assert response.status_code == 200
 
 def test_get_explore(client):
-    response = client.get("/explore", timeout=3, follows_redirect=True)
+    response = client.get("/explore", follows_redirect=True)
     assert response.status_code == 200
 
 # nice 3 test functions
