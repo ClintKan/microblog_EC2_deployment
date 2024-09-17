@@ -19,7 +19,6 @@ pipeline {
             steps {
                 sh '''#!/bin/bash
                 source venv/bin/activate
-                // export PYTHONPATH=$(pwd)
                 py.test ./tests/unit/test_app.py --verbose --junit-xml test-reports/results.xml
                 '''
             }
@@ -58,7 +57,7 @@ pipeline {
                 source venv/bin/activate
 
                 # Restart the microblog service
-                /bin/systemctl restart microblog // sudo 
+                sudo /bin/systemctl restart microblog 
 
                 # Check the status of the service
                 if bin/systemctl is-active --quiet microblog; then // sudo /bin/
