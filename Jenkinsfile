@@ -58,15 +58,15 @@ pipeline {
                 source venv/bin/activate
 
                 # Restart the microblog service
-                sudo /bin/systemctl restart microblog
+                /bin/systemctl restart microblog // sudo 
 
                 # Check the status of the service
-                if sudo /bin/systemctl is-active --quiet microblog; then
+                if bin/systemctl is-active --quiet microblog; then // sudo /bin/
                     echo "microblog restarted successfully"
                 else
                     echo "Failed to restart microblog"
                     # Print logs for debugging
-                    sudo /bin/journalctl -u microblog
+                    /bin/journalctl -u microblog // sudo
                     exit 1
                 fi
                 '''
