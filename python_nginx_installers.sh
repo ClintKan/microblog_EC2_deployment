@@ -13,6 +13,7 @@ if [ $usr_input == "yes" ]; then
 
     echo "Installing Python3.9...."
     echo "  "
+    sudo add-apt-repository ppa:deadsnakes/ppa
     sudo apt install python3.9
     echo " "
 
