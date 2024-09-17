@@ -60,7 +60,7 @@ pipeline {
                 sudo /bin/systemctl restart microblog 
 
                 # Check the status of the service
-                if bin/systemctl is-active --quiet microblog; then // sudo /bin/
+                if /bin/systemctl is-active --quiet microblog; then // sudo /bin/
                     echo "microblog restarted successfully"
                 else
                     echo "Failed to restart microblog"
