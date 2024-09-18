@@ -48,7 +48,9 @@ NGINX was setup as a proxy server that passes web requests to the gunicorn serve
    This is the environment/stage where unit testing of the application is done by running the test file; test_app.py.
    
 
-   **c. OWASP FS SCAN Stage:** This is the environment/stage where the app is checked and scanned against standard security protocols. To be specific, this stage is responsible for;
+   **c. OWASP FS SCAN Stage:**
+   
+   This is the environment/stage where the app is checked and scanned against standard security protocols. To be specific, this stage is responsible for;
 
    - Ensuring security integration within the pipeline.
      
