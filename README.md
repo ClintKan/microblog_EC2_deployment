@@ -71,6 +71,7 @@ eventually the deploy stage.
 	the app; microblog (a flask app).
 	- Not shown in this stage is that upon installation of nginx, nginx configuration file located at "**_/etc/nginx/sites-enabled/default_**" had to be edited (with the code below) so as to direct how to; handle web 	requests, route web traffic etc. for the default site on the server.
 
+
 	    ```
                 location / {
                 proxy_pass http://127.0.0.1:5000;
