@@ -24,6 +24,8 @@ eventually the deploy stage.
 3. CI/CD Pipeline configuration was then done within the Jenkins file as follows (reference it here to follow along):
 
    **a. Build Stage:**
+   
+   **b. Test Stage:**
 	- The command ```export FLASK_APP=microblog.py``` was to assign the environment variable FLASK_APP to be the 'microblog.py' python file. This is to.......
 	- The command ```gunicorn -b :5000 -w 4 microblog:app``` was to launch gunicorn app, a web server graphics interface used to run web apps, while assigning the use of port number 5000, hosting and/or serving
 	the app; microblog (a flask app).
@@ -37,8 +39,8 @@ eventually the deploy stage.
                 }
             ```
 
-**<ins>Why update the file as noted above?</ins>**
-
+**_Why update the file as noted above?_**
+<ins></ins>
 NGINX was setup as a proxy server that passes web requests to the gunicorn server running at http://127.0.0.1:5000 - the same location hosting the the microblog:app. The response to the request is then sent back to nginx and then to the client by nynix proxy. Hence being able to view the webapp on the public ip address of the computer - instead of the local host's IP address; 127.0.0.1
 
 
