@@ -24,8 +24,7 @@ eventually the deploy stage.
 3. CI/CD Pipeline configuration was then done within the Jenkins file as follows (reference it here to follow along):
 
    **a. Build Stage:**
-   
-   **b. Test Stage:**
+
 	- The command ```export FLASK_APP=microblog.py``` was to assign the environment variable FLASK_APP to be the 'microblog.py' python file. This is to.......
 	- The command ```gunicorn -b :5000 -w 4 microblog:app``` was to launch gunicorn app, a web server graphics interface used to run web apps, while assigning the use of port number 5000, hosting and/or serving
 	the app; microblog (a flask app).
@@ -45,8 +44,8 @@ NGINX was setup as a proxy server that passes web requests to the gunicorn serve
 
 
    **b. Test Stage:** This is the environment/stage where unit testing of the application is done by running the test file; test_app.py.
-   
-   **c. OWASP FS SCAN Stage:** : This is the environment/stage where the app is checked and scanned against standard security protocols. To be specific, this stage is responsible for;
+
+   **c. OWASP FS SCAN Stage:** This is the environment/stage where the app is checked and scanned against standard security protocols. To be specific, this stage is responsible for;
 
    - Ensuring security integration within the pipeline.
      
@@ -65,8 +64,11 @@ even auto-triggered during the build stage.
 
 
    **d. Clean Stage:** This is the environment/stage where termination of the running gunicorn app is done, and therefore free up the 5000 port that is to be then re-initiated, in the deploy stage.
-   
+
    **e. Deploy stage:** Here the commands required to deploy the application so that it is available to the internet.
+
+   
+
 
 
 2. Jenkins was installed installed on the EC2 using the script named "_install_jenkins.sh_"
