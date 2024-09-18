@@ -72,8 +72,8 @@ eventually the deploy stage.
 3. CI/CD Pipeline configuration was then done within the Jenkins file as follows (reference it here to follow along):
 
    **a. Build Stage:**
-	- The command 'export FLASK_APP=microblog.py' was to assign the environment variable FLASK_APP to be the 'microblog.py' python file. This is to.......
-	- The command 'gunicorn -b :5000 -w 4 microblog:app' was to launch gunicorn app, a web server graphics interface used to run web apps, while assigning the use of port number 5000, hosting and/or serving
+	- The command ```export FLASK_APP=microblog.py``` was to assign the environment variable FLASK_APP to be the 'microblog.py' python file. This is to.......
+	- The command ```gunicorn -b :5000 -w 4 microblog:app``` was to launch gunicorn app, a web server graphics interface used to run web apps, while assigning the use of port number 5000, hosting and/or serving
 	the app; microblog (a flask app).
 
 <div align="center">
