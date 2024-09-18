@@ -1,43 +1,3 @@
-
-
-
-## <ins>PROCESS</ins>
-
-1. 
-
-a. 
-
-	- 
- 
-  	- 
-   
-  		
-   
-   
-
-   
-
-
-	b). 
-
- 	c). OWASP FS SCAN: This is the environment/stage where the app is checked and scanned against standard security protocols. To be specific, this stage is responsible for
-  		- Ensuring security integration within the pipeline.
-    		- Catching any security risks that may arise from the bins and libraries.
-      		- Ensuring the web application meets the proper security standard protocols set.
-	Additionally, while in the Jenkins GUI via the web browser, OWASP Dependency-Check plugin, used a security feature to scan applications dependencies within the CI/CD pipeline by ensuring that a project is free
- 	from known vulnerabilities, was added. This is critical as it reduces chances of chances of security breaches and meeting compliance requirements. The plug-in can be either triggered as a stage in the pipeline or
-  	even auto-triggered during the build stage.
-
-
-<div align="center">
-    <ADD DEPENDENCY CHECK IMAGE HERE>
-</div>
-
-
-	d). Clean Stage: This is the environment/stage where termination of the running gunicorn app is done, and therefore free up the 5000 port that is to be then re-initiated, in the deploy stage.
- 	e). Deploy stage: Here the commands required to deploy the application so that it is available to the internet.
-
-
 **<ins>Note:</ins>**
 
 
@@ -85,7 +45,7 @@ NGINX was setup as a proxy server that passes web requests to the gunicorn serve
    **b. Test Stage:** This is the environment/stage where unit testing of the application is done by running the test file; test_app.py.
 
 
-   **c. Build Stage:** OWASP FS SCAN: This is the environment/stage where the app is checked and scanned against standard security protocols. To be specific, this stage is responsible for;
+   **c. OWASP FS SCAN Stage:** : This is the environment/stage where the app is checked and scanned against standard security protocols. To be specific, this stage is responsible for;
 
    - Ensuring security integration within the pipeline.
      
@@ -96,8 +56,16 @@ NGINX was setup as a proxy server that passes web requests to the gunicorn serve
 Additionally, while in the Jenkins GUI via the web browser, OWASP Dependency-Check plugin, used a security feature to scan applications dependencies within the CI/CD pipeline by ensuring that a project is free
 from known vulnerabilities, was added. This is critical as it reduces chances of chances of security breaches and meeting compliance requirements. The plug-in can be either triggered as a stage in the pipeline or
 even auto-triggered during the build stage.
-   
-  		
+
+
+<div align="center">
+    <ADD DEPENDENCY CHECK IMAGE HERE>
+</div>
+
+     
+   **d. Clean Stage:** This is the environment/stage where termination of the running gunicorn app is done, and therefore free up the 5000 port that is to be then re-initiated, in the deploy stage.
+
+   **d. Deploy stage:** Here the commands required to deploy the application so that it is available to the internet.
 
 
 2. Jenkins was installed installed on the EC2 using the script named "_install_jenkins.sh_"
