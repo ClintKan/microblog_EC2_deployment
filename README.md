@@ -16,11 +16,9 @@ a.
    
 
    
-**<ins>WHY?</ins>**
 
-NGINX was setup as a proxy server that passes web requests to the gunicorn server running at http://127.0.0.1:5000 - the same location hosting the the microblog:app. The response to the request is then sent back to nginx and then to the client by nynix proxy. Hence being able to view the webapp on the public ip address of the computer - instead of the local host's IP address; 127.0.0.1
 
-	b). Test Stage: This is the environment/stage where unit testing of the application is done by running the test file; test_app.py.
+	b). 
 
  	c). OWASP FS SCAN: This is the environment/stage where the app is checked and scanned against standard security protocols. To be specific, this stage is responsible for
   		- Ensuring security integration within the pipeline.
@@ -79,11 +77,21 @@ eventually the deploy stage.
                 }
             ```
 
+**<ins>Why update the file as noted above?</ins>**
+
+NGINX was setup as a proxy server that passes web requests to the gunicorn server running at http://127.0.0.1:5000 - the same location hosting the the microblog:app. The response to the request is then sent back to nginx and then to the client by nynix proxy. Hence being able to view the webapp on the public ip address of the computer - instead of the local host's IP address; 127.0.0.1
 
 
-<div align="center">
-	<img width="1345" alt="Pasted Graphic 6" src="https://github.com/user-attachments/assets/8a1cf22e-2037-4cf3-9c09-0621dc18f3c1">
-</div>
+   **b. Test Stage:** This is the environment/stage where unit testing of the application is done by running the test file; test_app.py.
+
+
+   **c. Build Stage:** OWASP FS SCAN: This is the environment/stage where the app is checked and scanned against standard security protocols. To be specific, this stage is responsible for
+  		- Ensuring security integration within the pipeline.
+    		- Catching any security risks that may arise from the bins and libraries.
+      		- Ensuring the web application meets the proper security standard protocols set.
+	Additionally, while in the Jenkins GUI via the web browser, OWASP Dependency-Check plugin, used a security feature to scan applications dependencies within the CI/CD pipeline by ensuring that a project is free
+ 	from known vulnerabilities, was added. This is critical as it reduces chances of chances of security breaches and meeting compliance requirements. The plug-in can be either triggered as a stage in the pipeline or
+  	even auto-triggered during the build stage.
 
 
 - **_These keys are used to establish a secure connection between two systems._**
