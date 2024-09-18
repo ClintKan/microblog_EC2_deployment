@@ -25,12 +25,13 @@ In this workload we focus on how to execute unit testing, how to execute a CI/CD
 
 1. Application source files was cloned into my GitHub (with a specified repo name - )
 2. An AWS t3.micro EC2 for Jenkins was created and the above mentioned repo cloned to the EC2. (_[Jenkins installation file found here](add-link-here)_)  with the following security configurations via port configurations; 22 for SSH, 8080 for Jenkins.
-3. CI/CD Pipeline configuration was then done within the Jenkins file as follows:
+3. CI/CD Pipeline configuration was then done within the Jenkins file as follows (reference it here to follow along):
+    
     a). Build Stage: were all of the commands required to prepare the environment for the application.
 
-            - The command 'export FLASK_APP=microblog.py' was to assign the environment variable FLASK_APP to be the 'microblog.py' python file. This is to.......
+  - The command 'export FLASK_APP=microblog.py' was to assign the environment variable FLASK_APP to be the 'microblog.py' python file. This is to.......
 
-            - Not mentioned here is that upon installation of nginx, nginx configuration file located at "/etc/nginx/sites-enabled/default" had to be edited (with the code below) so as to direct how to; handle web requests, route web traffic etc. for the default site on the server.
+  - Not mentioned here is that upon installation of nginx, nginx configuration file located at "/etc/nginx/sites-enabled/default" had to be edited (with the code below) so as to direct how to; handle web requests, route web traffic etc. for the default site on the server.
 
 
             ```
@@ -41,11 +42,14 @@ In this workload we focus on how to execute unit testing, how to execute a CI/CD
                 }
             ```
 
+
 **<ins>WHY?</ins>**
+
     NGINX was setup as a proxy server that passes web requests to the gunicorn server running at http://127.0.0.1:5000 - the same location hosting the the microblog:app. The response to the request is then sent back to nginx and then to the client by nynix proxy. Hence being able to view the webapp on the public ip address of the computer - instead of the local host's IP address; 127.0.0.1
 
 
-            - The command 'gunicorn -b :5000 -w 4 microblog:app' was to launch gunicorn app, a web server graphics interface used to run web apps, while assigning the use of port number 5000, hosting and/or serving the app; microblog (a flask app).
+
+  - The command 'gunicorn -b :5000 -w 4 microblog:app' was to launch gunicorn app, a web server graphics interface used to run web apps, while assigning the use of port number 5000, hosting and/or serving the app; microblog (a flask app).
 
 
     b). Test Stage: This is the environment/stage where unit testing of the application is done by running the test file; test_app.py.
