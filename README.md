@@ -12,7 +12,8 @@
 In this assignment, entirely in AWS, a WebApp is deployed - with all source files 
 built in GitHub, tested on a Jenkins server using the multi-branch CI/CD pipeline.
 
-While in Workload #1, we had to manually upload a zipped file - as downloaded from GitHub repo, in this assignment we use the AWS' EC2 the command line interface of AWS to launch the app. This brings about more effeciency and automation capabilities, reduction in human errors. With that said, this might also make it a bid harder to troubleshoot in case of a error.
+In this workload we focus on how to execute unit testing, how to execute a CI/CD pipeline with added stages; OWASP (a security feature), a Clean (to clean out any running services)
+ in Workload #1, we had to manually upload a zipped file - as downloaded from GitHub repo, in this assignment we use the AWS' EC2 the command line interface of AWS to launch the app. This brings about more effeciency and automation capabilities, reduction in human errors. With that said, this might also make it a bid harder to troubleshoot in case of a error.
 
 ## <ins> SYSTEM DIAGRAM</ins>
 <div align="center">
@@ -27,23 +28,24 @@ While in Workload #1, we had to manually upload a zipped file - as downloaded fr
 3. CI/CD Pipeline configuration was then done within the Jenkins file as follows:
     a). Build Stage: were all of the commands required to prepare the environment for the application.
 
-            ** The command 'export FLASK_APP=microblog.py' was to assign the environment variable FLASK_APP to be the 'microblog.py' python file. This is to.......
+            - The command 'export FLASK_APP=microblog.py' was to assign the environment variable FLASK_APP to be the 'microblog.py' python file. This is to.......
 
-            ** Not mentioned here is that upon installation of nginx, nginx configuration file located at "/etc/nginx/sites-enabled/default" had to be edited (with the code below) so as to direct how to; handle web requests, route web traffic etc. for the default site on the server.
-
-                              ```
-                  location / {
-                  proxy_pass http://127.0.0.1:5000;
-                  proxy_set_header Host $host;
-                  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                  }
-                  ```
-            
-            **<ins>WHY?</ins>**
-            NGINX was setup as a proxy server that passes web requests to the gunicorn server running at http://127.0.0.1:5000 - the same location hosting the the microblog:app. The response to the request is then sent back to nginx and then to the client by nynix proxy. Hence being able to view the webapp on the public ip address of the computer - instead of the local host's IP address; 127.0.0.1
+            - Not mentioned here is that upon installation of nginx, nginx configuration file located at "/etc/nginx/sites-enabled/default" had to be edited (with the code below) so as to direct how to; handle web requests, route web traffic etc. for the default site on the server.
 
 
-            ** The command 'gunicorn -b :5000 -w 4 microblog:app' was to launch gunicorn app, a web server graphics interface used to run web apps, while assigning the use of port number 5000, hosting and/or serving the app; microblog (a flask app).
+            ```
+                location / {
+                proxy_pass http://127.0.0.1:5000;
+                proxy_set_header Host $host;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                }
+            ```
+
+**<ins>WHY?</ins>**
+    NGINX was setup as a proxy server that passes web requests to the gunicorn server running at http://127.0.0.1:5000 - the same location hosting the the microblog:app. The response to the request is then sent back to nginx and then to the client by nynix proxy. Hence being able to view the webapp on the public ip address of the computer - instead of the local host's IP address; 127.0.0.1
+
+
+            - The command 'gunicorn -b :5000 -w 4 microblog:app' was to launch gunicorn app, a web server graphics interface used to run web apps, while assigning the use of port number 5000, hosting and/or serving the app; microblog (a flask app).
 
 
     b). Test Stage: This is the environment/stage where unit testing of the application is done by running the test file; test_app.py.
@@ -57,13 +59,11 @@ While in Workload #1, we had to manually upload a zipped file - as downloaded fr
 
 
     <ADD DEPENDENCY CHECK IMAGE HERE>
-    
+
 
     d). Clean Stage: This is the environment/stage where termination of the running gunicorn app is done, and therefore free up the 5000 port that is to be then re-initiated, in the deploy stage.
 
-    The 
-
-    * Deploy stage: Here the commands required to deploy the application so that it is available to the internet.
+    e). Deploy stage: Here the commands required to deploy the application so that it is available to the internet.
 
 
 **<ins>Note:</ins>**
