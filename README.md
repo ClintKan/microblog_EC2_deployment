@@ -70,8 +70,6 @@ eventually the deploy stage.
 	- The command ```gunicorn -b :5000 -w 4 microblog:app``` was to launch gunicorn app, a web server graphics interface used to run web apps, while assigning the use of port number 5000, hosting and/or serving
 	the app; microblog (a flask app).
 	- Not shown in this stage is that upon installation of nginx, nginx configuration file located at "**_/etc/nginx/sites-enabled/default_**" had to be edited (with the code below) so as to direct how to; handle web 	requests, route web traffic etc. for the default site on the server.
-
-
 	    ```
                 location / {
                 proxy_pass http://127.0.0.1:5000;
@@ -79,6 +77,7 @@ eventually the deploy stage.
                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
                 }
             ```
+
 
 
 <div align="center">
