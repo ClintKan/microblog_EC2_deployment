@@ -65,7 +65,7 @@ even auto-triggered during the build stage.
      
    **d. Clean Stage:** This is the environment/stage where termination of the running gunicorn app is done, and therefore free up the 5000 port that is to be then re-initiated, in the deploy stage.
 
-   **d. Deploy stage:** Here the commands required to deploy the application so that it is available to the internet.
+   **e. Deploy stage:** Here the commands required to deploy the application so that it is available to the internet.
 
 
 2. Jenkins was installed installed on the EC2 using the script named "_install_jenkins.sh_"
