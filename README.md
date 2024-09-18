@@ -49,6 +49,7 @@ In this workload we focus on how to execute unit testing, how to execute a CI/CD
 NGINX was setup as a proxy server that passes web requests to the gunicorn server running at http://127.0.0.1:5000 - the same location hosting the the microblog:app. The response to the request is then sent back to nginx and then to the client by nynix proxy. Hence being able to view the webapp on the public ip address of the computer - instead of the local host's IP address; 127.0.0.1
 
 	b). Test Stage: This is the environment/stage where unit testing of the application is done by running the test file; test_app.py.
+
  	c). OWASP FS SCAN: This is the environment/stage where the app is checked and scanned against standard security protocols. To be specific, this stage is responsible for
   		- Ensuring security integration within the pipeline.
     		- Catching any security risks that may arise from the bins and libraries.
