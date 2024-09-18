@@ -7,7 +7,7 @@
 
 a. 
 
-	- The command 'export FLASK_APP=microblog.py' was to assign the environment variable FLASK_APP to be the 'microblog.py' python file. This is to.......
+	- 
  
   	- The command 'gunicorn -b :5000 -w 4 microblog:app' was to launch gunicorn app, a web server graphics interface used to run web apps, while assigning the use of port number 5000, hosting and/or serving
    		the app; microblog (a flask app).
@@ -72,9 +72,9 @@ eventually the deploy stage.
 2. An AWS t3.micro EC2 for Jenkins was created and the above mentioned repo cloned to the EC2. (_[Jenkins installation file found here](add-link-here)_)  with the following security configurations via port configurations; 22 for SSH, 8080 for Jenkins.
 3. CI/CD Pipeline configuration was then done within the Jenkins file as follows (reference it here to follow along):
 
-a. Build Stage: were all of the commands required to prepare the environment for the application.
-- Port configuration; 8080 for Jenkins
-- An AWS Secret key was created with a use case selection being "Command Line Interface (CLI)"
+   **a. Build Stage:**
+	- The command 'export FLASK_APP=microblog.py' was to assign the environment variable FLASK_APP to be the 'microblog.py' python file. This is to.......
+	- An AWS Secret key was created with a use case selection being "Command Line Interface (CLI)"
 
 <div align="center">
 	<img width="1345" alt="Pasted Graphic 6" src="https://github.com/user-attachments/assets/8a1cf22e-2037-4cf3-9c09-0621dc18f3c1">
