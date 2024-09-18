@@ -43,8 +43,7 @@ NGINX was setup as a proxy server that passes web requests to the gunicorn serve
 
 
    **b. Test Stage:** This is the environment/stage where unit testing of the application is done by running the test file; test_app.py.
-
-
+   
    **c. OWASP FS SCAN Stage:** : This is the environment/stage where the app is checked and scanned against standard security protocols. To be specific, this stage is responsible for;
 
    - Ensuring security integration within the pipeline.
@@ -62,9 +61,9 @@ even auto-triggered during the build stage.
     <ADD DEPENDENCY CHECK IMAGE HERE>
 </div>
 
-     
-   **d. Clean Stage:** This is the environment/stage where termination of the running gunicorn app is done, and therefore free up the 5000 port that is to be then re-initiated, in the deploy stage.
 
+   **d. Clean Stage:** This is the environment/stage where termination of the running gunicorn app is done, and therefore free up the 5000 port that is to be then re-initiated, in the deploy stage.
+   
    **e. Deploy stage:** Here the commands required to deploy the application so that it is available to the internet.
 
 
