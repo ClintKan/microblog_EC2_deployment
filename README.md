@@ -86,20 +86,18 @@ NGINX was setup as a proxy server that passes web requests to the gunicorn serve
 
 
    **c. Build Stage:** OWASP FS SCAN: This is the environment/stage where the app is checked and scanned against standard security protocols. To be specific, this stage is responsible for;
+
+   - Ensuring security integration within the pipeline.
+     
+   - Catching any security risks that may arise from the bins and libraries.
+     
+   - Ensuring the web application meets the proper security standard protocols set.
+
+Additionally, while in the Jenkins GUI via the web browser, OWASP Dependency-Check plugin, used a security feature to scan applications dependencies within the CI/CD pipeline by ensuring that a project is free
+from known vulnerabilities, was added. This is critical as it reduces chances of chances of security breaches and meeting compliance requirements. The plug-in can be either triggered as a stage in the pipeline or
+even auto-triggered during the build stage.
    
-  		- Ensuring security integration within the pipeline.
-    
-    		- Catching any security risks that may arise from the bins and libraries.
-      
-      		- Ensuring the web application meets the proper security standard protocols set.
-	
-	Additionally, while in the Jenkins GUI via the web browser, OWASP Dependency-Check plugin, used a security feature to scan applications dependencies within the CI/CD pipeline by ensuring that a project is free
- 	from known vulnerabilities, was added. This is critical as it reduces chances of chances of security breaches and meeting compliance requirements. The plug-in can be either triggered as a stage in the pipeline or
-  	even auto-triggered during the build stage.
-
-
-- **_These keys are used to establish a secure connection between two systems._**
-- **_These keys are never shared/displayed publicly, but rather input directly in the systems that need them._**
+  		
 
 
 2. Jenkins was installed installed on the EC2 using the script named "_install_jenkins.sh_"
