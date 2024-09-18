@@ -1,36 +1,11 @@
-# C5 DEPLOYMENT WORKLOAD 3
-
-
----
-
-
-
-## Deployment of a WebApp - using a CI/CD Pipeline & with monitoring.
-
-
-## <ins> OBJECTIVE</ins>
-In this assignment, entirely in AWS, a WebApp is deployed - with all source files 
-built in GitHub, tested on a Jenkins server using the multi-branch CI/CD pipeline.
-
-In this workload we focus on how to execute unit testing, how to execute a CI/CD pipeline with added stages; OWASP (a security feature), a Clean (to clean out any running services)
- in Workload #1, we had to manually upload a zipped file - as downloaded from GitHub repo, in this assignment we use the AWS' EC2 the command line interface of AWS to launch the app. This brings about more effeciency and automation capabilities, reduction in human errors. With that said, this might also make it a bid harder to troubleshoot in case of a error.
-
-## <ins> SYSTEM DIAGRAM</ins>
-<div align="center">
-
-</div>
-
-
 
 
 
 ## <ins>PROCESS</ins>
 
-1. Application source files was cloned into my GitHub (with a specified repo name - )
-2. An AWS t3.micro EC2 for Jenkins was created and the above mentioned repo cloned to the EC2. (_[Jenkins installation file found here](add-link-here)_)  with the following security configurations via port configurations; 22 for SSH, 8080 for Jenkins.
-3. CI/CD Pipeline configuration was then done within the Jenkins file as follows (reference it here to follow along):
+1. 
 
-a. Build Stage: were all of the commands required to prepare the environment for the application.
+a. 
 
 	- The command 'export FLASK_APP=microblog.py' was to assign the environment variable FLASK_APP to be the 'microblog.py' python file. This is to.......
  
@@ -75,96 +50,168 @@ NGINX was setup as a proxy server that passes web requests to the gunicorn serve
 **<ins>Note:</ins>**
 
 
+# <ins>C5 DEPLOYMENT WORKLOAD 3</ins>
+
+   #### _Deployment of a WebApp - using a CI/CD Pipeline & with monitoring_
+
+## <ins> OBJECTIVE</ins>
+In this assignment, a WebApp is deployed entirely in AWS- with all source files built in GitHub, tested on a Jenkins server using the multi-branch CI/CD pipeline.
+There is a focus on how to execute unit testing, how to execute a CI/CD pipeline with added stages; **_OWASP (a security feature)_**, a **_Clean (to clean out any running services)_** and then 
+eventually the deploy stage.
+
+
+## <ins> SYSTEM DIAGRAM</ins>
+<div align="center">
+	<img width="752" alt="image" src="https://github.com/user-attachments/assets/83d2e7b9-bda6-41ed-9315-ae42a6302e64">
+</div>
+
+
+## <ins>PROCESS</ins>
+
+1. Application source files was cloned into my GitHub (with a specified repo name - )
+2. An AWS t3.micro EC2 for Jenkins was created and the above mentioned repo cloned to the EC2. (_[Jenkins installation file found here](add-link-here)_)  with the following security configurations via port configurations; 22 for SSH, 8080 for Jenkins.
+3. CI/CD Pipeline configuration was then done within the Jenkins file as follows (reference it here to follow along):
+
+a. Build Stage: were all of the commands required to prepare the environment for the application.
+- Port configuration; 8080 for Jenkins
+- An AWS Secret key was created with a use case selection being "Command Line Interface (CLI)"
+
+<div align="center">
+	<img width="1345" alt="Pasted Graphic 6" src="https://github.com/user-attachments/assets/8a1cf22e-2037-4cf3-9c09-0621dc18f3c1">
+</div>
+
+
+- **_These keys are used to establish a secure connection between two systems._**
+- **_These keys are never shared/displayed publicly, but rather input directly in the systems that need them._**
+
 
 2. Jenkins was installed installed on the EC2 using the script named "_install_jenkins.sh_"
 
 
-## Instructions
-
-1. Clone this repo to your GitHub account. IMPORTANT: Make sure that the repository name is "microblog_EC2_deployment"
-
-2. Create an Ubuntu EC2 instance (t3.micro) named "Jenkins" and install Jenkins onto it (are you still doing this manually?).  Be sure to configure the security group to allow for SSH and HTTP traffic in addition to the ports required for Jenkins and any other services needed (Security Groups can always be modified afterward)
-
-3. Configure the server by installing 'python3.9',  'python3.9-venv', 'python3-pip', and 'nginx'. (Hint: There are several ways to install a previous python version. One method was used in Workloads 1 and 2)
-
-4. Clone your GH repository to the server, cd into the directory, create and activate a python virtual environment with: 
-
-```
-$python3.9 -m venv venv
-$source venv/bin/activate
-```
-
-5. While in the python virtual environment, install the application dependencies and other packages by running:
+```sh
+sudo apt update && sudo apt install fontconfig openjdk-17-jre software-properties-common && sudo add-apt-repository ppa:deadsnakes/ppa && sudo apt install python3.7 python3.7-venv
+sudo wget -O /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt-get update
+sudo apt-get install jenkins
+sudo systemctl start jenkins
+sudo systemctl status jenkins
 
 ```
-$pip install -r requirements.txt
-$pip install gunicorn pymysql cryptography
+
+
+3. Jenkins GUI is logged into via **_http://[public-ip-address-of-ec2]:8080/_** using the initial admin password displayed by running the command;
+```sh
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
 
-6. Set the ENVIRONMENTAL Variable:
+4. Create a pipeline in Jenkins ([_steps found here_](https://github.com/ClintKan/C5-Deployment-Workload-2/blob/main/JenkinsPipeline_creation_how_to.txt)).
+
+Upon completion, an image similar to the one below should appear
+<div align="center">
+  <img width="1091" alt="Pasted Graphic 8" src="https://github.com/user-attachments/assets/47b8d4b2-7e27-432e-9a72-558787956b04">
+</div>
+
+5. A user named Jenkins is automatically created during process step #7 of the Jenkinsfile (located in C5-Deployment-Workload-2/Jenkinsfile) during the Jenkins pipeline run - at the build stage. This is key
+   because not on is it the one that will have access to the files needed in the pipeline, but it is same user that is to be used to execute the commands.
+   
+6. The change the password of it by running the command below;
+
+```sh
+sudo passwd jenkins
+```
+
+   #### Verification of existent of Jenkins admin account and it's password change.
+
+<div align="center">
+  <img width="730" alt="Pasted Graphic 10" src="https://github.com/user-attachments/assets/ce636f59-b215-4f78-b90a-f1d4d5ebf74d">
+</div>
+
+**<ins>Note:</ins>**
+
+To  navigate to the environment that holds the files executed by Jenkins, the navigaion woulld require to;
+- Navigate the terminal as the user Jenkins, therefore switching to the user Jenkins if not already.
+- Might require a password change if it's not known
+```sh
+sudo passwd jenkins # password change of the user jenkins
+sudo su - jenkins # switching into the user jenkins
+```
+- Then, navigate into the directory
+```sh
+cd ./workspace/ELB_Pipeline_main && ls -al
+```
+
+7. AWS CLI was then installed on the same EC2, using the script named "_install_aws_cli.sh_"
+
+```sh
+sudo apt-get install unzip
+
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+aws --version
 
 ```
-FLASK_APP=microblog.py
+
+
+   #### Verification of proper AWS-CLI installation.
+
+<div align="center">
+  <img width="656" alt="Pasted Graphic 9" src="https://github.com/user-attachments/assets/4cb552f8-a0a8-4dfe-bdb7-d86db9f988e5">
+</div>
+
+**_But also the command "aws ec2 describe-instances" can be run to show all details about the AWS CLI_**
+
+**<ins>Note:</ins>**
+
+**_If the code "aws ec2 describe-instances" is run, it may hang mid-way and not proceed - this is a command that just displays so to quit it and proceed just press "Q" on your keyboard._**
+
+8. Configuring AWS CLI & AWS Elastic Beanstalk in the terminal.
+
+#### Pre-requisites:
+- Prior to running the commands below, make sure you already have (if not create) an AWS CLI key pair - ([_see how here_](https://github.com/ClintKan/C5-Deployment-Workload-2/blob/main/AWSCLIKey_Creation_how_to.txt)).
+The key pair; a AWS Access Key ID  & Secret Access Keys, will have to be input into the terminal to initiate a secure connection between the terminal CLI - Command Line Interface and Jenkins environment.
+- You will need to know the scripting language to use, the region name and the output format decided on - in this assignment's case I used 'python3.7', '_us-east-1_' and '_json_' respectively.
+- Working in a virtual environment and using another user named "Jenkins"
+
+
+=> Run the commands below;
+```sh
+python3.7 -m venv venv # to create a virtual environment called venv (optional since Jenkins already created it in the Built phase)
+
+source venv/bin/activate # to get into a virtual environment called "venv"
+
+pip install awsebcli && eb --version #to install aws elastic beanstalk CLI in the terminal
+
+aws configure #activating the aws CLI that was installed in earlier steps - it is at this step where you specify the region and output format of the app.
+
+eb init #an initiation of the elastic beanstalk
 ```
-Question: What is this command doing?
 
-7. Run the following commands: 
+9. Head to Jenkins Web GUI to then run pipeline - Build, Test and Deploy
 
-```
-$flask translate compile
-$flask db upgrade
-```
+<div align="center">
+	<img width="1132" alt="Screenshot 2024-08-14 at 3 22 18 PM" src="https://github.com/user-attachments/assets/b8c0aac8-baaf-4fa8-ac2a-d3463b33c5a1">
+</div>
 
-8. Edit the NginX configuration file at "/etc/nginx/sites-enabled/default" so that "location" reads as below.
+**<ins>Note:</ins>** If an error is encountered during the Jenkins pipeline build and testing, it could be due to the following;
 
-Question: What is this config file/NginX responsible for?
+	(i)   Traverse the error logs in Jenkins and/or AWS and then act accordingly.
+ 	(ii)  A missing deployment stage, or improper denting or closing of a stage in the Jenkins configuration file.
+	(iii) Naming the Elastic Beanstalk a name that contains invalid characters - name must contain only letters, digits, and the dash character and may not start or end with a dash. Fixable by updating the Jenkins file
+ 	      in the Deploy stage part of the code.
+ 	      
+   
+10. If all is successful, you should navigate to ([_AWS Elastic Beanstalk_](https://us-east-1.console.aws.amazon.com/elasticbeanstalk/home)] menu to see if there exists a created environment and application.
+   In my case, regarding this project, with the WebAp accessible.
 
-9. Run the following command and then put the servers public IP address into the browser address bar
 
-```
-gunicorn -b :5000 -w 4 microblog:app
-```
-Question: What is this command doing? You should be able to see the application running in the browser but what is happening "behind the scenes" when the IP address is put into the browser address bar?
+<div align="center">
+	<img width="1198" alt="image" src="https://github.com/user-attachments/assets/4d8d37bf-e171-4601-94e0-9b941b5a2624">
+</div>
 
-10. If all of the above works, stop the application by pressing ctrl+c.  Now it's time to automate the pipeline.  Modify the Jenkinsfile and fill in the commands for the build and deploy stages.
 
-  a. The build stage should include all of the commands required to prepare the environment for the application.  This includes creating the virtual environment and installing all the dependencies, setting variables, and setting up the databases.
-
-  b. The test stage will run pytest.  Create a python script called test_app.py to run a unit test of the application source code. IMPORTANT: Put the script in a directory called "tests/unit/" of the GitHub repository. Note: The complexity of the script is up to you.  Work within your limits.  (Hint: If you don't know where to start, try testing the homepage or log in page.  Want to challenge yourself with something more complicated? Sky's the limit!)
-
-  c. The deploy stage will run the commands required to deploy the application so that it is available to the internet. 
-
-  d. There is also a 'clean' and an 'WASP FS SCAN' stage.  What are these for?
-  
-11. In Jenkins, install the "OWASP Dependency-Check" plug-in
-
-    a. Navigate to "Manage Jenkins" > "Plugins" > "Available plugins" > Search and install
-
- 	b. Then configure it by navigating to "Manage Jenkins" > "Tools" > "Add Dependency-Check > Name: "DP-Check" > check "install automatically" > Add Installer: "Install from github.com"
-
-Question: What is this plugin for?  What is it doing?  When does it do it?  Why is it important?
-
-12. Create a MultiBranch Pipeline and run the build.  IMPORTANT: Make sure the name of the pipeline is: "workload_3".
-
-    Note: Did the pipeline complete? Is the application running?
-
-    Hint: if the pipeline stage is unable to complete because the process is running, perhaps the process should be run in the BACKGROUND (daemon).
-    
-    Hint pt 2: NOW does the pipeline complete? Is the application running?  If not: What happened to that RUNNING PROCESS after the deploy STAGE COMPLETES? (stayAlive)
-
-14. After the application has successfully deployed, create another EC2 (t3.micro) called "Monitoring".  Install Prometheus and Grafana and configure it to monitor the activity on the server running the application. 
-
-15. Document! All projects have documentation so that others can read and understand what was done and how it was done. Create a README.md file in your repository that describes:
-
-	  a. The "PURPOSE" of the Workload,
-
-  	b. The "STEPS" taken (and why each was necessary/important),
-      Question: Were steps 4-9 absolutely necessary for the CICD pipeline? Why or why not?
-    
-  	c. A "SYSTEM DESIGN DIAGRAM" that is created in draw.io (IMPORTANT: Save the diagram as "Diagram.jpg" and upload it to the root directory of the GitHub repo.),
-
-	  d. "ISSUES/TROUBLESHOOTING" that may have occured,
-
-  	e. An "OPTIMIZATION" section for that answers the question: What are the advantages of provisioning ones own resources over using a managed service like Elastic Beanstalk?  Could the infrastructure created in this workload be considered that of a "good system"?  Why or why not?  How would you optimize this infrastructure to address these issues?
-
-    f. A "CONCLUSION" statement as well as any other sections you feel like you want to include.
+<div align="center">
+   	<img width="1112" alt="image" src="https://github.com/user-attachments/assets/5dd2ec0a-6661-4b7f-8c01-670002ea90c1"> 
+</div>
+   
