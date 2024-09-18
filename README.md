@@ -14,13 +14,7 @@ a.
   		
    
    
-	    ```
-                location / {
-                proxy_pass http://127.0.0.1:5000;
-                proxy_set_header Host $host;
-                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                }
-            ```
+
    
 **<ins>WHY?</ins>**
 
@@ -73,9 +67,19 @@ eventually the deploy stage.
 
    **a. Build Stage:**
 	- The command ```export FLASK_APP=microblog.py``` was to assign the environment variable FLASK_APP to be the 'microblog.py' python file. This is to.......
-	- The command ```**gunicorn -b :5000 -w 4 microblog:app**__``` was to launch gunicorn app, a web server graphics interface used to run web apps, while assigning the use of port number 5000, hosting and/or serving
+	- The command ```gunicorn -b :5000 -w 4 microblog:app``` was to launch gunicorn app, a web server graphics interface used to run web apps, while assigning the use of port number 5000, hosting and/or serving
 	the app; microblog (a flask app).
-	- Not shown in this stage is that upon installation of nginx, nginx configuration file located at "/etc/nginx/sites-enabled/default" had to be edited (with the code below) so as to direct how to; handle web 		requests, route web traffic etc. for the default site on the server.
+	- Not shown in this stage is that upon installation of nginx, nginx configuration file located at "**_/etc/nginx/sites-enabled/default_**" had to be edited (with the code below) so as to direct how to; handle web 	requests, route web traffic etc. for the default site on the server.
+
+
+	    ```
+                location / {
+                proxy_pass http://127.0.0.1:5000;
+                proxy_set_header Host $host;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                }
+            ```
+
 
 <div align="center">
 	<img width="1345" alt="Pasted Graphic 6" src="https://github.com/user-attachments/assets/8a1cf22e-2037-4cf3-9c09-0621dc18f3c1">
