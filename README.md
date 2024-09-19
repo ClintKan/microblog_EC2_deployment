@@ -26,19 +26,24 @@ eventually the deploy stage.
    **a. Build Stage:**
 
 	While most were to prepare the environment in which the app was to be run, the commands below are the ones that I am highlighting for the reasons to be shared respecitvely;
+
  	- The command ```export FLASK_APP=microblog.py``` was to assign the environment variable FLASK_APP to be the 'microblog.py' python file. This is to point the flask app to look for the app in micrroblog.py
 	Similarly, the above command can instead be entered in the ~/.bashrc file as shown in the image below.
+
 
 	<div align="center">
 		<img width="965" alt="Pasted Graphic 33" src="https://github.com/user-attachments/assets/dcca2b18-c7d0-482d-9ccf-22b1ff6c276b">
 	</div>
 
+
 	- The command ```gunicorn -b :5000 -w 4 microblog:app``` was to launch gunicorn app, a web server graphics interface used to run web apps, while assigning the use of port number 5000, hosting and/or serving
 	the app; microblog (a flask app). When running, it appears, in the browser, as the image below.
+
 
 	<div align="center">
 		<img width="1446" alt="Pasted Graphic 35" src="https://github.com/user-attachments/assets/a334f050-8923-4f5c-8c11-14d9dacb83e7">
  	</div>
+
 
 	- Not shown in this stage is that upon installation of nginx, nginx configuration file located at "**_/etc/nginx/sites-enabled/default_**" had to be edited (with the code below) so as to direct how to; handle web 	requests, route web traffic etc. for the default site on the server.
 
