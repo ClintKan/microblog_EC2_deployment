@@ -96,7 +96,8 @@ even auto-triggered during the build stage.
 
 
 <div align="center">
-    <ADD DEPENDENCY CHECK IMAGE HERE>
+    <img width="1461" alt="Pasted Graphic" src="https://github.com/user-attachments/assets/0e166b92-300c-47d2-a7ce-3ebbaa9f0593">
+
 </div>
 
 
