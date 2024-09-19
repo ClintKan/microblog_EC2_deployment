@@ -13,9 +13,8 @@ eventually the deploy stage.
 ## <ins> SYSTEM DIAGRAM</ins>
 
 <div align="center">
-	<img width="965" alt="Workload 3 Sys Diag" src="https://github.com/user-attachments/assets/5e10f957-a1c6-4161-9fa4-4761de9b3dc5">
+	<img width="965" alt="Workload 3 Sys Diag" src="https://github.com/user-attachments/assets/5eed5497-8cb9-45c3-8115-cd950c6227b6">
 </div>
-
 
 ## <ins>PROCESS</ins>
 
