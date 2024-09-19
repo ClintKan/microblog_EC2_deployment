@@ -1,6 +1,3 @@
-**<ins>Note:</ins>**
-
-
 # <ins>C5 DEPLOYMENT WORKLOAD 3</ins>
 
 
