@@ -12,8 +12,9 @@ eventually the deploy stage.
 
 
 ## <ins> SYSTEM DIAGRAM</ins>
+
 <div align="center">
-	![Workload 3 Sys Diag](https://github.com/user-attachments/assets/da910a7e-b1f1-4c7e-af21-7258cfd02d70)
+	<img width="965" alt="Workload 3 Sys Diag" src="https://github.com/user-attachments/assets/5e10f957-a1c6-4161-9fa4-4761de9b3dc5">
 </div>
 
 
