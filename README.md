@@ -73,7 +73,7 @@ eventually the deploy stage.
    This is the environment/stage where unit testing of the application is done by running the test file; test_app.py.
    
 
-   **c. OWASP FS SCAN Stage:**
+   **(c.) OWASP FS SCAN Stage:**
 
    Using the National Vulnerability Database (NVD) API key, in this stage the app is checked and scanned against standard security protocols. To be specific, this stage is responsible for;
 
