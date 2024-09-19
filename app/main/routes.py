@@ -51,7 +51,7 @@ def index():
                            prev_url=prev_url)
 
 
-@bp.route('/explores')
+@bp.route('/explore')
 @login_required
 def explore():
     page = request.args.get('page', 1, type=int)
