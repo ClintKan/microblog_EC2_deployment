@@ -54,8 +54,7 @@ This will give the Jenkins user permission to restart, check the status, and che
 be needed during the pipeline. This is often done for automation purposes in CI/CD pipelines so Jenkins can manage services without manual intervention.
 
 1. Application source files was cloned into my GitHub (with a specified repo name - without the quotes - "**_microblog_EC2_deployment_**")
-2. An AWS t3.medium EC2 for Jenkins was created and the above mentioned repo cloned to the EC2. (_[Jenkins installation file found here](add-link-here)_)  with the following security configurations
-   via port configurations; 22 for SSH, 8080 for Jenkins.
+2. An AWS t3.medium EC2 for Jenkins was created and the above mentioned repo cloned to the EC2 (_[Jenkins installation file found here](https://github.com/ClintKan/microblog_EC2_deployment/blob/main/Jenkinsfile)_) with the following security configurations via port configurations; 22 for SSH, 8080 for Jenkins.
 3. CI/CD Pipeline configuration was then done within the Jenkins file as follows (reference it here to follow along):
 
    **(a.) Build Stage:**
