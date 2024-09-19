@@ -13,7 +13,7 @@ eventually the deploy stage.
 
 ## <ins> SYSTEM DIAGRAM</ins>
 <div align="center">
-	<img width="752" alt="image" src="https://github.com/user-attachments/assets/83d2e7b9-bda6-41ed-9315-ae42a6302e64">
+	<>
 </div>
 
 
