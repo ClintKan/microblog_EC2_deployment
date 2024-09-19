@@ -55,7 +55,7 @@ This will give the Jenkins user permission to restart, check the status, and che
 be needed during the pipeline. This is often done for automation purposes in CI/CD pipelines so Jenkins can manage services without manual intervention.
 
 1. Application source files was cloned into my GitHub (with a specified repo name - without the quotes - "**_microblog_EC2_deployment_**")
-2. An AWS t3.micro EC2 for Jenkins was created and the above mentioned repo cloned to the EC2. (_[Jenkins installation file found here](add-link-here)_)  with the following security configurations
+2. An AWS t3.medium EC2 for Jenkins was created and the above mentioned repo cloned to the EC2. (_[Jenkins installation file found here](add-link-here)_)  with the following security configurations
    via port configurations; 22 for SSH, 8080 for Jenkins.
 3. CI/CD Pipeline configuration was then done within the Jenkins file as follows (reference it here to follow along):
 
@@ -153,6 +153,13 @@ A successful deployment would look as the image below;
     <img width="1689" alt="image" src="https://github.com/user-attachments/assets/258f10c5-1abd-4b90-a88e-0c6d25bbebfa">
 
 </div>
+
+4. Monitoring. This was done in a separately created t3.micro EC2, with ports (for); 22 (SSH), 9090 (Prometheus), and 3000 (Grafana) opened within the AWS security group configuration.
+5. On the Monitoring EC2, prometheus, grafana were installed using this script.
+6. The prometheus yml file was updated as follows - so as to scrape the metrics broadcasted by the Jenkins server
+   
+7. Finally, Prometheus was 
+
    
 
 
