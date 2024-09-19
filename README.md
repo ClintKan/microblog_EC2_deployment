@@ -3,9 +3,11 @@
 
 # <ins>C5 DEPLOYMENT WORKLOAD 3</ins>
 
-   #### _Deployment of a WebApp - using a CI/CD Pipeline & with monitoring_
 
 ## <ins> OBJECTIVE</ins>
+
+   #### _Deployment of a WebApp - using a CI/CD Pipeline & with monitoring_
+   
 In this assignment, a WebApp is deployed entirely in AWS - with all source files built in GitHub, tested on a Jenkins server using the multi-branch CI/CD pipeline.
 There is a focus on how to execute unit testing, how to execute a CI/CD pipeline with added stages; **_OWASP (a security feature)_**, a **_Clean (to clean out any running services)_** and then 
 eventually the deploy stage.
@@ -156,9 +158,31 @@ A successful deployment would look as the image below;
 
 4. Monitoring. This was done in a separately created t3.micro EC2, with ports (for); 22 (SSH), 9090 (Prometheus), and 3000 (Grafana) opened within the AWS security group configuration.
 5. On the Monitoring EC2, prometheus, grafana were installed using this script.
-6. The prometheus yml file was updated as follows - so as to scrape the metrics broadcasted by the Jenkins server
+6. The prometheus yml file [found here; ``` sudo nano /opt/prometheus/prometheus.yml ```] was updated as follows - so as to scrape the metrics broadcasted by the Jenkins server
+replacing the ``` jenkins-ip-address ``` with the real IP address of the Jenkins EC2
+	```
+ 	scrape_configs:
+	  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+	  - job_name: "prometheus"
+	    static_configs:
+	      - targets: ["<jenkins-ip-address>:9090"]
+	  - job_name: "node_exporter"
+	    static_configs:
+	      - targets: ["jenkins-ip-address:9100"]
+	  - job_name: "microblog app"
+	    static_configs:
+	      - targets: ["jenkins-ip-address:4000"]
+
+	```
+
    
-7. Finally, Prometheus was 
+7. Finally, Grafana - accessible at the http://ip-address-of-monitoriing-ec2:3000 in the browser - was configured to have dashboards showing the details of the EC2 being monitored.
+In my case, I scraped the CPU usage, memory usage, and network traffic usage.
+
+<div align="center">
+	<img width="1138" alt="Pasted Graphic 4" src="https://github.com/user-attachments/assets/e354f721-c232-4c43-a2b1-f7724bafa3f5">
+</div>
+
 
    
 
