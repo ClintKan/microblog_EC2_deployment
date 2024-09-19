@@ -177,7 +177,7 @@ replacing the ``` jenkins-ip-address ``` with the real IP address of the Jenkins
 
    
 7. Finally, Grafana - accessible at the http://ip-address-of-monitoriing-ec2:3000 in the browser - was configured to have dashboards showing the details of the EC2 being monitored.
-In my case, I scraped the CPU usage, memory usage, and network traffic usage.
+In my case, I scraped the CPU usage (the blue line), memory usage (green line), and storage usage (yellow line).  FYI: The blue and yellow line were intertwined as per the image shown.
 
 <div align="center">
 	<img width="1138" alt="Pasted Graphic 4" src="https://github.com/user-attachments/assets/e354f721-c232-4c43-a2b1-f7724bafa3f5">
