@@ -6,7 +6,7 @@
    #### _Deployment of a WebApp - using a CI/CD Pipeline & with monitoring_
 
 ## <ins> OBJECTIVE</ins>
-In this assignment, a WebApp is deployed entirely in AWS- with all source files built in GitHub, tested on a Jenkins server using the multi-branch CI/CD pipeline.
+In this assignment, a WebApp is deployed entirely in AWS - with all source files built in GitHub, tested on a Jenkins server using the multi-branch CI/CD pipeline.
 There is a focus on how to execute unit testing, how to execute a CI/CD pipeline with added stages; **_OWASP (a security feature)_**, a **_Clean (to clean out any running services)_** and then 
 eventually the deploy stage.
 
