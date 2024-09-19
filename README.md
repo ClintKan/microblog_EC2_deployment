@@ -152,7 +152,7 @@ A successful deployment would look as the image below;
 </div>
 
 4. Monitoring. This was done in a separately created t3.micro EC2, with ports (for); 22 (SSH), 9090 (Prometheus), and 3000 (Grafana) opened within the AWS security group configuration.
-5. On the Monitoring EC2, prometheus, grafana were installed using [this](https://github.com/ClintKan/microblog_EC2_deployment/blob/main/install_prom_graf_node.sh script).
+5. On the Monitoring EC2, prometheus, grafana were installed using [this](https://github.com/ClintKan/microblog_EC2_deployment/blob/main/install_prom_graf_node.sh) script.
 6. The prometheus yml file [found here; ``` sudo nano /opt/prometheus/prometheus.yml ```] was updated as follows - so as to scrape the metrics broadcasted by the Jenkins server
 replacing the ``` jenkins-ip-address ``` with the real IP address of the Jenkins EC2
 	```
