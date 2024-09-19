@@ -53,19 +53,16 @@ pipeline {
       stage ('Deploy') {
             steps {
                 sh '''#!/bin/bash
-                # Start Flask application
                 source venv/bin/activate
-
-                # Restart the microblog service
                 sudo /bin/systemctl restart microblog 
 
                 # Check the status of the service
-                if /bin/systemctl is-active --quiet microblog; then // sudo /bin/
+                if /bin/systemctl is-active --quiet microblog; then
                     echo "microblog restarted successfully"
                 else
                     echo "Failed to restart microblog"
                     # Print logs for debugging
-                    /bin/journalctl -u microblog // sudo
+                    /bin/journalctl -u microblog
                     exit 1
                 fi
                 '''
