@@ -176,14 +176,12 @@ In my case, I scraped the CPU usage (the blue line), memory usage (green line), 
 
 <div align="center">
 	<img width="1138" alt="Pasted Graphic 4" src="https://github.com/user-attachments/assets/e354f721-c232-4c43-a2b1-f7724bafa3f5">
-	
-	<img width="1004" alt="image" src="https://github.com/user-attachments/assets/ddbe374b-4093-4cf7-b827-c5830dab501a">
-
-
 </div>
 
 
-   
+<div align="center">
+	<img width="1004" alt="image" src="https://github.com/user-attachments/assets/ddbe374b-4093-4cf7-b827-c5830dab501a">
+</div>
 
 
 
