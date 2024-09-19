@@ -19,8 +19,43 @@ eventually the deploy stage.
 
 ## <ins>PROCESS</ins>
 
+
+Noteable Things:
+- A system process file for the app; microblog, has to be created prior to running the pipeline. This is to easily manage the app, like keeping it running when needed (in the Deploy stage) or killing it when needed (in the (Clean stage) by calling upon the process ID (PID).
+This is done by executing the command; sudo nano /etc/systemd/system/microblog.service and the below added in the opened file.
+
+		```
+		Unit]
+		Description=Gunicorn instance to serve microblog
+		After=network.target
+		
+		[Service]
+		User=jenkins
+		Group=jenkins
+		WorkingDirectory=/var/lib/jenkins/workspace/workload_3_main
+		Environment="/var/lib/jenkins/workspace/workload_3_main/venv/bin"
+		ExecStart=/var/lib/jenkins/workspace/workload_3_main/venv/bin/gunicorn -b :5000 -w 4 microblog:app
+		
+		[Install]
+		WantedBy=multi-user.target
+  
+		```
+
+
+- In case of running into an error at the Deploy stage where the error is about the user not having permissions or needed to provide the password of the user to execute, then do the following;
+Excecute the command: ```sudo visudo ```. Then append the following in the file
+
+```
+jenkins ALL=(ALL) NOPASSWD: /bin/systemctl restart microblog, /bin/systemctl status microblog, /bin/systemctl is-active microblog
+
+```
+
+This will give the Jenkins user permission to restart, check the status, and check the active state of the microblog service using systemctl, without "requiring a password each time" that would 
+be needed during the pipeline. This is often done for automation purposes in CI/CD pipelines so Jenkins can manage services without manual intervention.
+
 1. Application source files was cloned into my GitHub (with a specified repo name - without the quotes - "**_microblog_EC2_deployment_**")
-2. An AWS t3.micro EC2 for Jenkins was created and the above mentioned repo cloned to the EC2. (_[Jenkins installation file found here](add-link-here)_)  with the following security configurations via port configurations; 22 for SSH, 8080 for Jenkins.
+2. An AWS t3.micro EC2 for Jenkins was created and the above mentioned repo cloned to the EC2. (_[Jenkins installation file found here](add-link-here)_)  with the following security configurations
+   via port configurations; 22 for SSH, 8080 for Jenkins.
 3. CI/CD Pipeline configuration was then done within the Jenkins file as follows (reference it here to follow along):
 
    **(a.) Build Stage:**
@@ -111,6 +146,14 @@ even auto-triggered during the build stage.
 
    In this stage was the commands required to deploy the application so that it is available to the internet.
 
+A successful deployment would look as the image below;
+
+<div align="center">
+    <img width="1689" alt="image" src="https://github.com/user-attachments/assets/258f10c5-1abd-4b90-a88e-0c6d25bbebfa">
+
+</div>
    
+
+
 
 
