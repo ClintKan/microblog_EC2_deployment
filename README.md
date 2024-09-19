@@ -23,7 +23,7 @@ eventually the deploy stage.
 2. An AWS t3.micro EC2 for Jenkins was created and the above mentioned repo cloned to the EC2. (_[Jenkins installation file found here](add-link-here)_)  with the following security configurations via port configurations; 22 for SSH, 8080 for Jenkins.
 3. CI/CD Pipeline configuration was then done within the Jenkins file as follows (reference it here to follow along):
 
-   **a. Build Stage:**
+   **(a.) Build Stage:**
 
 	While most were to prepare the environment in which the app was to be run, the commands below are the ones that I am highlighting for the reasons to be shared respecitvely;
 
@@ -59,13 +59,15 @@ eventually the deploy stage.
                 }
             ```
 
-	**_Why update the file as noted above?_** 
-	NGINX was setup as a proxy server that passes web requests to the gunicorn server running at http://127.0.0.1:5000 - the same location hosting the the microblog:app. The response to the request is then sent back to nginx and then to the
+	**_Why update the file as noted above?_**
+
+	NGINX was setup as a proxy server that passes web requests to the gunicorn server running at http://127.0.0.1:5000 - the same location hosting the the microblog:app. The response to the request is then sent back to
+	nginx and then to the
 	client by nynix proxy. Hence being able to view the webapp on the public ip address of the computer - instead of the local host's IP address; 127.0.0.1
 
 
 
-   **b. Test Stage:**
+   **(b.) Test Stage:**
 
 	
    This is the environment/stage where unit testing of the application is done by running the test file; test_app.py.
@@ -99,12 +101,12 @@ even auto-triggered during the build stage.
 
 
 
-   **d. Clean Stage:**
+   **(d.) Clean Stage:**
 
    This is the environment/stage where termination of the running gunicorn app is done, and therefore free up the 5000 port that is to be then re-initiated, in the deploy stage.
 
 
-   **d. Deploy Stage:**
+   **(e.) Deploy Stage:**
 
    In this stage was the commands required to deploy the application so that it is available to the internet.
 
