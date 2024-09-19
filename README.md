@@ -13,14 +13,15 @@ eventually the deploy stage.
 
 ## <ins> SYSTEM DIAGRAM</ins>
 <div align="center">
-	<>
+	![Pasted Graphic 5](https://github.com/user-attachments/assets/aa8fbfe9-5b03-4e24-a75a-5df57ef0674e)
+
 </div>
 
 
 ## <ins>PROCESS</ins>
 
 
-Noteable Things:
+_**Key Pre-requisites to running the pipeline:**_
 - A system process file for the app; microblog, has to be created prior to running the pipeline. This is to easily manage the app, like keeping it running when needed (in the Deploy stage) or killing it when needed (in the (Clean stage) by calling upon the process ID (PID).
 This is done by executing the command; sudo nano /etc/systemd/system/microblog.service and the below added in the opened file.
 
