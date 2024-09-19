@@ -14,7 +14,7 @@ def test_get_home(client):
      assert response.status_code == 200
 
 def test_get_login(client):
-     response = client.get("/auth/login", follow_redirects=True)
+     response = client.get("/auth/logins", follow_redirects=True)
      assert response.status_code == 200
 
 def test_get_explore(client):
