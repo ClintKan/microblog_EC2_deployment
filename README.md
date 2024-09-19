@@ -64,13 +64,20 @@ eventually the deploy stage.
 
    **c. OWASP FS SCAN Stage:**
 
-   This is the environment/stage where the app is checked and scanned against standard security protocols. To be specific, this stage is responsible for;
+   Using the National Vulnerability Database (NVD) API key, in this stage the app is checked and scanned against standard security protocols. To be specific, this stage is responsible for;
 
    - Ensuring security integration within the pipeline.
      
    - Catching any security risks that may arise from the bins and libraries.
      
    - Ensuring the web application meets the proper security standard protocols set.
+  
+            ```
+                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit --nvdApiKey <enter-your-NVDAPI-key>', odcInstallation: 'DP-Check'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+
+            ```
+     
 
 Additionally, while in the Jenkins GUI via the web browser, OWASP Dependency-Check plugin, used a security feature to scan applications dependencies within the CI/CD pipeline by ensuring that a project is free
 from known vulnerabilities, was added. This is critical as it reduces chances of chances of security breaches and meeting compliance requirements. The plug-in can be either triggered as a stage in the pipeline or
