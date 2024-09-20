@@ -183,6 +183,20 @@ In my case, I scraped the CPU usage (the blue line), memory usage (green line), 
 	<img width="1004" alt="image" src="https://github.com/user-attachments/assets/ddbe374b-4093-4cf7-b827-c5830dab501a">
 </div>
 
+## <ins>Issues Encountered - along with solutions steps taken</ins>
 
+- A lot of variables that has to be changed, either within the environment or the CI/CD pipeline to ensure a proper smooth test pipeline run.
+- False positive with the installation of python3.9. It appeared to install fine but on finding the version, it was missing. Upon research I had to install “python deadsnakes” (sudo add-apt-repository ppa:deadsnakes/ppa) 
+- Jenkins EC2 was too slow - had wrongly setup a t2.micro instead of a t3.micro, which also ended up being slow. Had to resort to t3.medium. 
+- The unfamiliarity of OWASP-Check Plugin, what it is, what it, did and why it failed in the pipeline. With the help of colleagues I was advised to use NVD API key to within the command lines in the OWASP stage to then pass. 
+- The constant need to keep updating the yml file to reflect the IP address of the EC2 for scrapping and monitoring. While static IPs would be the reason, time constraint disabled the further exploration of this as a solution. 
+
+## <ins>OPTIMIZATION</ins>
+
+How can the deployment be optimized? This depends on what I experienced and below is how I would think about optimizing the setup.
+- Reduction on the libraries & bin dependencies , by use of a containerizing application.
+- Using a static but a bit more resource friendly to securely check the application code - during the CI/CD pipeline.
+- Using of a centralized monitoring and logging solution/application, like CloudWatch in this case where AWS was used.
+- Using a faster/more powerful server setup (in this case EC2), or even deploying with auto-scaling environment.
 
 
